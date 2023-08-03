@@ -27,6 +27,7 @@ typedef struct binary_tree_s avl_t;
 
 /*helper functtion*/
 void binary_tree_print(const binary_tree_t *);
+int new_binary_tree_height(const binary_tree_t *tree);
 
 /* Mandatory task*/
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
