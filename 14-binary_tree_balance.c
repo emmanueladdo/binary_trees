@@ -6,10 +6,10 @@
  * Return: retruns 1 if true or 0 if false
  */
 
-int binary_tree_is_leaf(const binary_tree_t *node)
+int binary_tree_is_leaf(const binary_tree_t *tree)
 {
-	if (node != NULL)
-		if (node->left == NULL && node->right == NULL)
+	if (tree != NULL)
+		if (tree->left == NULL && tree->right == NULL)
 			return (1);
 		else
 			return (0);
