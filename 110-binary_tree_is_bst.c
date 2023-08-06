@@ -1,3 +1,6 @@
+#include "binary_trees.h"
+
+
 /**
  * bst_lesser - BST validator function lesser helper
  * @node: node to compare
