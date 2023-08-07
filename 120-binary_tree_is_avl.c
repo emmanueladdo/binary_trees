@@ -1,48 +1,47 @@
 #include "binary_trees.h"
-#include "110-binary_tree_is_bst.c"
+#include "9-binary_tree_height.c"
+
 
 /**
- * custom_binary_tree_height - Measure the height
- * of a binary tree from a given node
- * @tree: pointer to node of tree to measure
- * Description: Edited to work with balance factor function
- * Return: height of tree or 0 if NULL
+ * avl_val - helper function to compare each subtree if its AVL.
+ * @tree: node that point to the tree to check.
+ * @high: node that point to the higher node selected
+ * @lower: node that point to the lower node selected.
+ * Return: 1 if tree is AVL, 0 if not.
  */
-int custom_binary_tree_height(const binary_tree_t *tree)
+int avl_val(const binary_tree_t *tree, int lower, int high)
 {
-	int left, right;
+	size_t height_l, height_r, balancer;
 
-	if (tree == NULL)
-		return (0);
-
-	if (tree->left == NULL && tree->right == NULL)
-		return (1);
-
-	left = custom_binary_tree_height(tree->left) + 1;
-	right = custom_binary_tree_height(tree->right) + 1;
-
-	if (left > right)
-		return (left);
-	else
-		return (right);
+	if (tree != NULL)
+	{
+		if (tree->n > high || tree->n < lower)
+		{
+			return (0);
+		}
+		height_l = binary_tree_height(tree->left);
+		height_r = binary_tree_height(tree->right);
+		balancer = height_l > height_r ? height_l - height_r : height_r - height_l;
+		if (balancer > 1)
+		{
+			return (0);
+		}
+		return (avl_val(tree->left, lower, tree->n - 1) &&
+			avl_val(tree->right, tree->n + 1, high));
+	}
+	return (1);
 }
 
 /**
- * binary_tree_is_avl - check if a binary tree is a valid AVL tree
- * @tree: pointer to root node of tree
- * Return: 1 if AVL tree, else 0
+ * binary_tree_is_avl - checks if a binary tree is a valid AVL Tree.
+ * @tree: pointer to the root node of the tree to check.
+ * Return: 1 if tree is a valid AVL Tree, and 0 otherwise.
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-	int lheight, rheight;
-
 	if (tree == NULL)
+	{
 		return (0);
-
-	lheight = custom_binary_tree_height(tree->left);
-	rheight = custom_binary_tree_height(tree->right);
-
-	if (abs(lheight - rheight) <= 1)
-		return (binary_tree_is_bst(tree));
-	return (0);
+	}
+	return (avl_val(tree, INT_MIN, INT_MAX));
 }
