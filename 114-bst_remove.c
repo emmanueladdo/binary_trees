@@ -7,12 +7,8 @@
  */
 bst_t *bst_find_root(bst_t *node)
 {
-	if (node == NULL)
-		return (NULL);
-
-	while (node->parent)
-		node = node->parent;
-
+	while (node->left)
+		node = node->left;
 	return (node);
 }
 
