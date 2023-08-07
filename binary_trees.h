@@ -31,6 +31,7 @@ void binary_tree_print(const binary_tree_t *);
 int new_binary_tree_height(const binary_tree_t *tree);
 void levelorderhelp(const binary_tree_t *tree, size_t level, void (*func)(int));
 bst_t *bst_find_root(bst_t *node);
+avl_t *right_insert(avl_t **tree, avl_t *parent, avl_t **new, int nval);
 
 /* Mandatory task*/
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
@@ -66,5 +67,6 @@ bst_t *array_to_bst(int *array, size_t size);
 bst_t *bst_search(const bst_t *tree, int value);
 bst_t *bst_remove(bst_t *root, int value);
 int binary_tree_is_avl(const binary_tree_t *tree);
+avl_t *avl_insert(avl_t **tree, int value);
 
 #endif /*_BINARY_TREES_H_*/
